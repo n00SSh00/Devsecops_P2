@@ -1920,11 +1920,33 @@
                   "new": false,
                   "number": 101,
                   "score": "28"
+                },
+                {
+                  "id": "805ec207-8ffa-4b30-abfb-6d61269a3afa",
+                  "title": "HTTP Flooding",
+                  "status": "Mitigated",
+                  "severity": "Low",
+                  "type": "Denial of service",
+                  "description": "Ein Angreifer flutet das Loginsystem mit HTTP Anfragen, sodass das System keine Nutzeranfragen bearbeiten kann.\nCAPEC-125: Flooding\nT1498.001: Network Denial of Service: Direct Network Flood \n\nD: 8 (Unternehmen kann nicht weiterarbeiten ohne mögliche Kundenlogins)\nR: 10 (Kann extrem einfach zu jeder Zeit durchgeführt werden)\nE: 7 (Legt System lahm aber führt nicht zu anderen Exploits)\nA: 9 (Nur externe User kommen nicht ins System)\n\nGesamt: 34",
+                  "mitigation": "Firewall mit IDS (wehrt ungültige Anfragen ab und sperrt IPs die zu viele Anfragen schicken)\nD3-DNSDL: DNS Denylisting\n\nD: 1 (Könnte mit sehr viel Arbeit umgangen werden aber sehr schwer + IDS schmeißt raus)\nR: 2 (Kann nicht mehr wirklich gemacht werden nur mit übermäßigem Aufwand)\nE: 2 (Eigentlich Begründung wie oben)\nA: 2 (FALLS ein Angriff gelingt sind nur die Users die sich zwischen Angriffsstart und IDS Maßnahmen einloggen wollen betroffen)\n\nGesamt: 7",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 108,
+                  "score": "7"
                 }
               ],
               "hasOpenThreats": false,
               "isWebApplication": null,
-              "handlesCardPayment": null
+              "handlesCardPayment": null,
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 1,
+                "elevationOfPrivilege": 0
+              },
+              "handlesGoodsOrServices": null
             }
           },
           {
@@ -2039,14 +2061,36 @@
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "threats": [],
+              "threats": [
+                {
+                  "id": "b6b35cab-be74-4d13-8336-45f052230d95",
+                  "title": "Elevation of privilege",
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "type": "Elevation of privilege",
+                  "description": "Schwächen in der Zugriffskontrolle oder Implementierung können dazu führen, dass ein normaler Benutzer oder ein Angreifer über eine Schwachstelle höhere Rechte erlangt. Damit könnte er z.B. beliebige OTTs als „gültig“ markieren, 2FA für Konten deaktivieren oder Konfigurationen ändern.\n\nCAPEC-233: Privilege Escalation – Angreifer nutzen Schwächen, um Aktionen auszuführen, zu denen sie eigentlich nicht berechtigt sind (z.B. durch Fehlkonfigurationen, Schwachstellen oder Umgehung von Zugriffskontrollen).\nATT&CK: TA0004 – Privilege Escalation – Taktiken, um höhere Berechtigungen im System/Netz zu erlangen und damit weitere bösartige Aktionen zu ermöglichen.\n\nD: 10 / R: 8 / E: 7 / A: 7 / DREA: 32",
+                  "mitigation": "Separate Rollen/Services ausgelagert und erfordern starke Authentisierung (MFA, Jump-Host). \nAlle Admin-Aktionen werden detailliert geloggt und vom SIEM überwacht.\nRegelmäßige Patch-Zyklen einplanen, um Implementierungsfehler zu finden.\n\nASVS: V1 (Architektur) & V4 (Access Control) – Single, gut geprüfter Access-Control-Mechanismus, strikte Durchsetzung des Least-Privilege-Prinzips (z.B. ASVS 4.1.3).\nD3FEND: D3-ANET / D3-AZET – Authentication/Authorization Event Thresholding – Auffällige Admin-Logins und Autorisierungsereignisse (z.B. Massen-Disable von 2FA) erkennen und alarmieren.\n\nD (nach Maßnahme): 7 / R: 5 / E: 4 / A: 5 / Neuer DREA: 21 (Priorität: Medium)",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 109,
+                  "score": "21"
+                }
+              ],
               "hasOpenThreats": false,
               "isBidirectional": false,
               "protocol": "",
               "isEncrypted": false,
               "isPublicNetwork": false,
               "handlesCardPayment": null,
-              "isWebApplication": null
+              "isWebApplication": null,
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 2
+              }
             }
           },
           {
@@ -2178,7 +2222,8 @@
               ],
               "hasOpenThreats": true,
               "handlesCardPayment": null,
-              "handlesGoodsOrServices": null
+              "handlesGoodsOrServices": null,
+              "isWebApplication": null
             }
           },
           {
@@ -2316,6 +2361,13 @@
               "handlesCardPayment": null,
               "handlesGoodsOrServices": null,
               "isWebApplication": null
+            },
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove"
+              ],
+              "name": null
             }
           },
           {
@@ -3201,7 +3253,7 @@
               },
               {
                 "x": 480,
-                "y": 200
+                "y": 180
               },
               {
                 "x": 480,
@@ -3874,7 +3926,27 @@
               "isSigned": false,
               "storesCredentials": false,
               "storesInventory": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "fa54ada3-4ba4-4bb5-9aaf-2376d046b413",
+                  "title": "Information disclosure",
+                  "status": "Mitigated",
+                  "severity": "High",
+                  "type": "Information disclosure",
+                  "description": "Ein Angreifer, der diese Datenbank oder deren Backups kompromittiert , kann umfangreiche Profile von Kunden erstellen und OTT-bezogene Informationen für Folgeangriffe (Account Takeover, Phishing) missbrauchen.\n\nCAPEC-37: Retrieve Embedded Sensitive Data – Angreifer durchsuchen Systeme/Dateien, um eingebettete vertrauliche Daten wie Kontonummern oder Schlüssel zu extrahieren.\nATT&CK: TA0009 – Collection – Der Angreifer sammelt systematisch Daten aus Logs, Dateien und Datenbanken, um sie später zu exfiltrieren oder für weitere Angriffe zu nutzen.\n\nD: 9 / R: 6 / E: 6 / A: 7 / DREA: 28",
+                  "mitigation": "Zugriff nur für minimal benötigte Rollen (RBAC, Least Privilege), starke Authentisierung (MFA) für Admins und SIEM-Operatoren. \nLogs, die personenbezogene Daten enthalten (z.B. Telefonnummern maskieren).\n Zugriffe auf die SIEM-DB selbst umfassend loggen und im SIEM auswerten.\n\nASVS: V6/V7/V9 – Schutz sensibler Daten und Kryptographie: „Verify that regulated private data is stored encrypted while at rest“ und dass Zugriffe nach dem Need-to-know-Prinzip erfolgen.\nD3FEND: D3-UBA / D3-RAPA – User Behavior / Resource Access Pattern Analysis zur Erkennung ungewöhnlicher Zugriffe auf Log-Tabellen (z.B. massenhaftes Lesen von Logdaten durch einzelne Accounts).\n\nD (nach Maßnahme): 5 / R: 4 / E: 4 / A: 4 / Neuer DREA: 17 (Priorität: Medium)",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 107,
+                  "score": "17"
+                }
+              ],
+              "threatFrequency": {
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 2,
+                "denialOfService": 0
+              }
             }
           },
           {
@@ -4056,7 +4128,7 @@
     ],
     "reviewer": "Georg Neugebauer",
     "diagramTop": 11,
-    "threatTop": 105
+    "threatTop": 109
   },
   "version": "2.5.0"
 }
