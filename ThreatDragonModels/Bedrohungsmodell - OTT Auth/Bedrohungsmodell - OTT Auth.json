@@ -1929,8 +1929,8 @@
           },
           {
             "position": {
-              "x": 488,
-              "y": -11.999999999999922
+              "x": 565,
+              "y": -7
             },
             "size": {
               "width": 130,
@@ -2884,7 +2884,17 @@
                 "x": 559.5,
                 "y": -60
               }
-            ]
+            ],
+            "tools": {
+              "items": [
+                "boundary",
+                "button-remove",
+                "vertices",
+                "source-arrowhead",
+                "target-arrowhead"
+              ],
+              "name": null
+            }
           },
           {
             "shape": "flow",
@@ -3348,11 +3358,13 @@
                 "text": "Log-DB"
               },
               "topLine": {
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               },
               "bottomLine": {
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -3452,8 +3464,28 @@
               "storesCredentials": false,
               "isEncrypted": true,
               "isSigned": true,
-              "hasOpenThreats": false,
-              "threats": []
+              "hasOpenThreats": true,
+              "threats": [
+                {
+                  "id": "6d5d8f80-710b-4633-9d85-7a3dd5564a82",
+                  "title": "Logs Manipulation ",
+                  "status": "Open",
+                  "severity": "TBD",
+                  "type": "Repudiation",
+                  "description": "Ein interner oder externer Angreifer mit Zugriff auf die Log-DB manipuliert, löscht oder ergänzt Logeinträge, um Spuren eines Angriffs zu verwischen oder falsche Informationen zu erzeugen. Dadurch werden Auswertungen und forensische Analysen verfälscht.\nCAPEC-268 Audit Log Manipulation\nMITRE ATT&CK: T1070 Defense Evasion",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 103,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "tampering": 0,
+                "repudiation": 1,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
             }
           },
           {
@@ -4004,7 +4036,7 @@
     ],
     "reviewer": "Georg Neugebauer",
     "diagramTop": 11,
-    "threatTop": 102
+    "threatTop": 103
   },
   "version": "2.5.0"
 }
