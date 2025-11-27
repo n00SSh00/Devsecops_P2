@@ -2107,8 +2107,8 @@
                 "text": "Telefonnummer-\nAPI-Gateway"
               },
               "body": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
+                "stroke": "#333333",
+                "strokeWidth": 1.5,
                 "strokeDasharray": null
               }
             },
@@ -2205,22 +2205,8 @@
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "threats": [
-                {
-                  "id": "d0e4d7a1-9f41-44f4-a16c-025cbf400749",
-                  "title": "New STRIDE threat",
-                  "status": "Open",
-                  "severity": "TBD",
-                  "type": "Spoofing",
-                  "description": "Provide a description for this threat",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
-                  "modelType": "STRIDE",
-                  "new": true,
-                  "number": 104,
-                  "score": ""
-                }
-              ],
-              "hasOpenThreats": true,
+              "threats": [],
+              "hasOpenThreats": false,
               "handlesCardPayment": null,
               "handlesGoodsOrServices": null,
               "isWebApplication": null
@@ -2340,17 +2326,17 @@
               "reasonOutOfScope": "",
               "threats": [
                 {
-                  "id": "31607411-287a-47ff-b617-eba251187f8c",
-                  "title": "Spoofing von Kundendaten",
+                  "id": "0b28e0fb-5505-4869-af6d-5bea71358cbb",
+                  "title": "Spoofing",
                   "status": "Mitigated",
-                  "severity": "Low",
+                  "severity": "High",
                   "type": "Spoofing",
-                  "description": "Angreifer kann sich als \"legitimer\" Kunde ausgeben, um an kritische Daten / Dienste zu gelangen zu denen er eigentlich keinen Zugriff haben dürfte (Social Engineering beim Kundendienst).\n\nCAPEC ID: 148: Content Spoofing: An adversary modifies content to make it contain something other than what the original content producer intended while keeping the apparent source of the content unchanged.\nAtt&ck: T1557 (Adversary-in-the-Middle)\n\nD: 9 / R: 8 / E: 5 / A: 4 / DREA: 26",
-                  "mitigation": "Personal schulen, Kritische Kundendaten als solche für Mitarbeiter in der Support-Software markieren, um Irrtümer zu vermeiden. \n\nDefend Matrix: D3-NTCD: Network Traffic Community Deviation\nASVS: 1.8.1 : Verify that all sensitive data is identified and classified into protection levels.\n\nD: 4 / R: 4 / E: 2 / A: 4 / Neuer DREA: 14",
+                  "description": "Ein Angreifer betreibt einen eigenen OTT dienst. \n\nCAPEC-151: Identity Spoofing – Ein Angreifer täuscht die Identität eines legitimen Subjekts vor (hier: OTT-Service von Allsecure), um Vertrauen zu missbrauchen und unberechtigten Zugriff zu erlangen.\nMITRE ATT&CK: TA0006 Credential Access Der Angreifer sammelt Zugangsdaten oder nutzt gestohlene Konten, indem er vermeintlich legitime Kommunikationskanäle nutzt.\n\nDREA (vor Gegenmaßnahmen):\nD = 10  (Voller Kontozugriff inkl. 2FA-Umgehung möglich)\nR = 8   (Kann beliebig oft wiederholt werden, solange Nutzer hereinfällt)\nE = 7   (Realistisch mit heutigen SMS-/Absender-Spoofing-Möglichkeiten)\nA = 9   \n\nDREA-Score = 34  → Priorität: HIGH\n",
+                  "mitigation": "Umstieg auf stärkere 2FA-Verfahren App-basierte OTPs  statt SMS.\nKlare Sicherheitsmerkmale in der offiziellen Allsecure-App.\nDeutliche Kommunikation gegenüber Kunden, dass Allsecure niemals Links zum Login per SMS versendet und OTTs nur auf offiziellen Loginseiten/App eingegeben werden dürfen.\n\n- OWASP ASVS: V2 – Authentication Verification, insbesondere Anforderungen zu Multi-Factor Authentication und sicheren 2FA-Kanälen.\n- OWASP MASVS: MASVS-AUTH und MASVS-NET – Sicheres App-Login und Schutz vor Phishing durch klare UI-Flows, Zertifikat-Pinning und eindeutige Vertrauensanker in der mobilen App.\n\n\nD = 7   (Kontoübernahme weiterhin kritisch, aber schwieriger, da SMS nicht mehr primärer Faktor ist)\nR = 5   (Wiederholter Missbrauch wird durch Monitoring, Anomalie-Erkennung und Awareness eher entdeckt)\nE = 4   (Angriffe schwieriger, da Nutzer nicht mehr auf Links in SMS klicken müssen und starke 2FA aktiviert ist)\nA = 5   (Weniger Nutzer betroffen, da App-MFA bevorzugt genutzt wird und SMS nur Fallback ist)\n\nNeuer DREA-Score = 21  → Priorität: MEDIUM",
                   "modelType": "STRIDE",
                   "new": false,
-                  "number": 102,
-                  "score": "14"
+                  "number": 110,
+                  "score": "21"
                 }
               ],
               "hasOpenThreats": false,
@@ -2360,14 +2346,15 @@
               "isPublicNetwork": false,
               "handlesCardPayment": null,
               "handlesGoodsOrServices": null,
-              "isWebApplication": null
-            },
-            "tools": {
-              "items": [
-                "boundary",
-                "button-remove"
-              ],
-              "name": null
+              "isWebApplication": null,
+              "threatFrequency": {
+                "spoofing": 1,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
@@ -4128,7 +4115,7 @@
     ],
     "reviewer": "Georg Neugebauer",
     "diagramTop": 11,
-    "threatTop": 109
+    "threatTop": 110
   },
   "version": "2.5.0"
 }
