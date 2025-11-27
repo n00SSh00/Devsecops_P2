@@ -1680,8 +1680,8 @@
         "cells": [
           {
             "position": {
-              "x": 12,
-              "y": 53
+              "x": 2,
+              "y": -6.999999999999922
             },
             "size": {
               "width": 160,
@@ -2063,8 +2063,8 @@
                 "text": "Telefonnummer-\nAPI-Gateway"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
@@ -2161,8 +2161,24 @@
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "threats": [],
-              "hasOpenThreats": false
+              "threats": [
+                {
+                  "id": "d0e4d7a1-9f41-44f4-a16c-025cbf400749",
+                  "title": "New STRIDE threat",
+                  "status": "Open",
+                  "severity": "TBD",
+                  "type": "Spoofing",
+                  "description": "Provide a description for this threat",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": true,
+                  "number": 104,
+                  "score": ""
+                }
+              ],
+              "hasOpenThreats": true,
+              "handlesCardPayment": null,
+              "handlesGoodsOrServices": null
             }
           },
           {
@@ -2884,17 +2900,7 @@
                 "x": 559.5,
                 "y": -60
               }
-            ],
-            "tools": {
-              "items": [
-                "boundary",
-                "button-remove",
-                "vertices",
-                "source-arrowhead",
-                "target-arrowhead"
-              ],
-              "name": null
-            }
+            ]
           },
           {
             "shape": "flow",
@@ -3152,17 +3158,29 @@
               "isEncrypted": true,
               "isPublicNetwork": false,
               "protocol": "TLS 1.2",
-              "threats": []
+              "threats": [
+                {
+                  "id": "7e26c318-85b3-4125-80a3-d1989966e4ce",
+                  "title": "Manipulation des OTT-Datenflusses",
+                  "status": "Mitigated",
+                  "severity": "Medium",
+                  "type": "Tampering",
+                  "description": "Ein Angreifer, der Netzwerkverkehr im internen Allsecure-Netz beeinflussen kann , manipuliert die Nachricht „Telefonnummer, OTT“ zwischen 2-Faktor-Authentifizierungsdienst und Allsecure Mobile Phone OTT Service. Dadurch könnten OTTs an andere Zielnummern umgeleitet oder eigene OTT-Werte eingeschleust werden.\n\nCAPEC-153: Input Data Manipulation – Angreifer kontrollieren Struktur/Inhalt von Eingabedaten, um die Verarbeitung zu ihrem Vorteil zu beeinflussen (z.B. manipulierte Protokollnachrichten).\nATT&CK: TA0005 – Defense Evasion – Manipulation oder Verschleierung von Daten im Transit, um Überwachung und Schutzmechanismen zu umgehen.\n\nD: 8\nR: 7\nE: 7\nA: 6 \nDERA= 28",
+                  "mitigation": "In diesem Data Flow eine gegenseitig authentisierte TLS-Verbindung einsetzen und die OTT-Nachricht zusätzlich mit einem HMAC oder einer digitalen Signatur schützen. \n\nD3FEND: D3-NTF / D3-ITF – Network / Inbound Traffic Filtering – Nur autorisierte Hosts/Ports für diesen Datenfluss zulassen, übrigen Traffic blockieren.\nASVS: V5 – Validation, Sanitisation and Encoding – Alle sicherheitskritischen Felder (Telefonnummer, OTT, Nonce, Zeitstempel) strikt validieren.\n\nD (nach Maßnahme): 5 / R: 4 / E: 3 / A: 4 / Neuer DREA: 16",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 105,
+                  "score": "16"
+                }
+              ],
+              "threatFrequency": {
+                "tampering": 3,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
             },
             "labels": [
-              {
-                "attrs": {
-                  "label": {
-                    "text": "Telefonnummer, OTT"
-                  }
-                },
-                "position": 0.5
-              }
+              "2a. Telefonnummer"
             ],
             "id": "3f9c3edd-4fe5-4fc4-9239-2ca13291fc25",
             "source": {
@@ -3174,12 +3192,16 @@
             },
             "vertices": [
               {
+                "x": 480,
+                "y": 120
+              },
+              {
                 "x": 450,
                 "y": 160
               },
               {
                 "x": 480,
-                "y": 210
+                "y": 200
               },
               {
                 "x": 480,
@@ -3358,13 +3380,11 @@
                 "text": "Log-DB"
               },
               "topLine": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
+                "strokeWidth": 1.5,
                 "strokeDasharray": null
               },
               "bottomLine": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
+                "strokeWidth": 1.5,
                 "strokeDasharray": null
               }
             },
@@ -3464,25 +3484,25 @@
               "storesCredentials": false,
               "isEncrypted": true,
               "isSigned": true,
-              "hasOpenThreats": true,
+              "hasOpenThreats": false,
               "threats": [
                 {
                   "id": "6d5d8f80-710b-4633-9d85-7a3dd5564a82",
                   "title": "Logs Manipulation ",
-                  "status": "Open",
-                  "severity": "TBD",
+                  "status": "Mitigated",
+                  "severity": "Low",
                   "type": "Repudiation",
-                  "description": "Ein interner oder externer Angreifer mit Zugriff auf die Log-DB manipuliert, löscht oder ergänzt Logeinträge, um Spuren eines Angriffs zu verwischen oder falsche Informationen zu erzeugen. Dadurch werden Auswertungen und forensische Analysen verfälscht.\nCAPEC-268 Audit Log Manipulation\nMITRE ATT&CK: T1070 Defense Evasion",
-                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "description": "Ein interner oder externer Angreifer mit Zugriff auf die Log-DB manipuliert, löscht oder ergänzt Logeinträge, um Spuren eines Angriffs zu verwischen oder falsche Informationen zu erzeugen. Dadurch werden Auswertungen und forensische Analysen verfälscht.\nCAPEC-268 Audit Log Manipulation\nMITRE ATT&CK: T1070 Defense Evasion\n\nD: 8 (Angreifer kann dadurch Angriffe vertuschen und persistent im System lauern)\nR: 10 (Kann alle Spuren, dass er im System ist löschen damit ewig im System bleiben)\nE: 5 (Angreifer muss erstmal durch das Login System ins System kommen)\nA: 3 (Nur Firma aber keine User wirklich betroffen)\n\nGesamt: 26",
+                  "mitigation": "Passwort + internes Netzwerk + 2. Faktor + Timeout\nD3-LAMED: LAN Access Mediation\n\n\nD: 8 (Falls er es schafft ist die Damage unverändert)\nR: 1 (Muss immer wieder durch den Timeout ins System kommen)\nE: 1 (Unnormal schwer)\nA: 3 (Selbe wie oben)\n\nGesamt: 13",
                   "modelType": "STRIDE",
                   "new": false,
                   "number": 103,
-                  "score": ""
+                  "score": "13"
                 }
               ],
               "threatFrequency": {
                 "tampering": 0,
-                "repudiation": 1,
+                "repudiation": 2,
                 "informationDisclosure": 0,
                 "denialOfService": 0
               }
@@ -4036,7 +4056,7 @@
     ],
     "reviewer": "Georg Neugebauer",
     "diagramTop": 11,
-    "threatTop": 103
+    "threatTop": 105
   },
   "version": "2.5.0"
 }
